@@ -27,38 +27,35 @@ Consumer healthcare and OTC pharmaceutical brands operate in a high-compliance, 
 ---
 
 ## 🏗️ End-to-End Architecture
-*
-[ Data Generation Layer ]
-│
-├── generate_data.py (Faker & Pandas: Multi-Region OTC Customers & SKUs)
-│
-▼
-[ Snowflake Landing Zone ]
-│
-├── RAW_DB.CPG_RAW.RAW_CUSTOMERS (Raw Ingestion)
-└── RAW_DB.CPG_RAW.RAW_PRODUCTS  (Raw Ingestion)
-│
-│  [ TRANSFORMING_WH Compute Engine ]
-▼
-[ dbt Transformation Pipeline ]
-│
-├── 1. Staging Layer (Models materialized as Views)
-│      ├── stg_cpg__customers  ──> Cleans casing, trims strings, standardizes ISO country codes
-│      └── stg_cpg__products   ──> Casts numeric types, derives unit gross margin (£)
-│
-├── 2. Data Quality & Assertions (schema.yml)
-│      ├── unique & not_null tests on customer_id
-│      └── unique & not_null tests on product_id
-│
-└── 3. Marts Layer (Models materialized as Tables)
-├── dim_customers ──> Standardized multi-market customer profiles & registration metadata
-└── dim_products  ──> Product catalog enriched with gross margin percentages
-│
-▼
-[ CI/CD & Orchestration ]
-├── GitHub Actions: Automated schema parsing and syntax validation on push/PR
-└── dbt Docs: Interactive Directed Acyclic Graph (DAG) and data dictionary
-*
+
+```mermaid
+flowchart TD
+    subgraph S1 [1. Local Ingestion]
+        A[generate_data.py] --> B[(raw_customers.csv)]
+        A --> C[(raw_products.csv)]
+    end
+
+    subgraph S2 [2. Snowflake Landing]
+        B --> D[(RAW_CUSTOMERS)]
+        C --> E[(RAW_PRODUCTS)]
+    end
+
+    subgraph S3 [3. dbt Staging Layer]
+        D --> F[stg_cpg__customers]
+        E --> G[stg_cpg__products]
+    end
+
+    subgraph S4 [4. dbt Gold Marts]
+        F --> H[(dim_customers)]
+        G --> I[(dim_products)]
+    end
+
+    subgraph S5 [5. CI/CD & Governance]
+        J[schema.yml Data Tests] -.-> H
+        J -.-> I
+        K[GitHub Actions CI] --> J
+    end
+```
 ---
 
 ## 📊 Dimensional Models & Business Metrics Solved
