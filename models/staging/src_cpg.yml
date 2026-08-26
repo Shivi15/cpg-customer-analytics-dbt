@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: cpg_raw
+    database: RAW_DB
+    schema: CPG_RAW
+    description: "Raw landing tables for CPG customer and product transaction data."
+    tables:
+      - name: raw_customers
+        description: "Raw customer demographic and signup feed."
+      - name: raw_products
+        description: "Product catalog for OTC and personal care SKUs."

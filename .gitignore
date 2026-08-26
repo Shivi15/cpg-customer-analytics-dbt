@@ -216,3 +216,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+dbt_internal_packages/
+
+dbt-env/
+logs/
+target/
+dbt_packages/
+.DS_Store
+.vscode/
+*.pyc
+profiles.yml

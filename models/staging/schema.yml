@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_cpg__customers
+    description: "Standardized customer records with clean casing and validated data types."
+    columns:
+      - name: customer_id
+        description: "Primary key for customers."
+        tests:
+          - unique
+          - not_null
+      - name: email
+        tests:
+          - not_null
+
+  - name: stg_cpg__products
+    description: "Standardized CPG product catalog with calculated gross margins."
+    columns:
+      - name: product_id
+        description: "Primary key for products."
+        tests:
+          - unique
+          - not_null
