@@ -4,17 +4,6 @@ An enterprise-grade ELT pipeline designed for an Over-The-Counter (OTC) & Consum
 
 ---
 
-## 🎯 Project Motivation & Migration from Starter Scaffolding
-
-When initializing dbt projects via `dbt init`, default scaffolding generates sandbox fixtures (such as the standard `jaffle_shop` restaurant template). While useful for basic syntax learning, generic tutorial models do not reflect real-world enterprise architectures, strict data contracts, or domain-specific analytics challenges.
-
-**What We Achieved:**
-* Completely stripped out default `jaffle_shop` starter templates and sample food-service models.
-* Designed and deployed an enterprise-grade **CPG / OTC Healthcare Data Architecture** tailored to multi-regional retail and direct-to-consumer operations.
-* Implemented strict Role-Based Access Control (RBAC) in Snowflake, structured modular staging views, dimension tables, automated schema tests, and continuous integration via GitHub Actions.
-
----
-
 ## 🏢 Business Problem & Industry Context
 
 Consumer healthcare and OTC pharmaceutical brands operate in a high-compliance, multi-currency, and margin-sensitive environment. Business stakeholders (Commercial Finance, Regional Growth, and Supply Chain) require clean, governed data models to answer key operational questions:
@@ -38,7 +27,7 @@ Consumer healthcare and OTC pharmaceutical brands operate in a high-compliance, 
 ---
 
 ## 🏗️ End-to-End Architecture
-
+*
 [ Data Generation Layer ]
 │
 ├── generate_data.py (Faker & Pandas: Multi-Region OTC Customers & SKUs)
@@ -69,7 +58,7 @@ Consumer healthcare and OTC pharmaceutical brands operate in a high-compliance, 
 [ CI/CD & Orchestration ]
 ├── GitHub Actions: Automated schema parsing and syntax validation on push/PR
 └── dbt Docs: Interactive Directed Acyclic Graph (DAG) and data dictionary
-
+*
 ---
 
 ## 📊 Dimensional Models & Business Metrics Solved
